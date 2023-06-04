@@ -229,26 +229,7 @@ class EnemyRobot():
         euler_z = euler_from_quaternion(quaterion_list)[2] #exctract euler z from quaternion conversion
         self.pose = (msg.pose.pose.position.x, msg.pose.pose.position.y, euler_z) #Put in correct format for pose
         #print(self.pose)
-
-    def trapezoid(self, radius, rate):
-
-        ##### Using Draw Polygon ######
-
-        top_base_val = radius * math.cos(math.pi / 4) # The x and y coords of the leg verts with be the same value because of the 45 degree angle
-
-        points = [(0, radius), (top_base_val, top_base_val), (top_base_val, -1 * top_base_val), (0, -1 * radius),
-                  (0, 0)] # The point to visit in order, ending with returning to (0,0)
-
-        #Transforms the points so that the trapezoid is relative to the robots position
-        current_pos = (self.pose[0], self.pose[1])
-        for i in range(0, len(points)):
-            points[i] = (points[i][0] + current_pos[0], points[i][1] + current_pos[1])
-
-            print(points[i])
-
-        #Passes all the points to the polygon function
-        self.drawPolygon(points, rate)
-"""A class to handle position readings. Should probably be changed"""
+        
 class Radar:
     def __init__(self, pose, time_a):
         self.pose = pose
